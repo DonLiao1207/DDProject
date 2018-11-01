@@ -1,0 +1,664 @@
+﻿@model _AreaControl.Models.UserList
+@{
+
+    // Layout = null;
+    string IP_host1 = "192.168.203.183";
+    string IP_host2 = "192.168.203.131";
+    string IP_host3 = "192.168.203.131";
+
+    IP_host1 = "192.168.1.3";  // QRC
+    IP_host2 = "192.168.1.2";
+    IP_host3 = "192.168.1.3";
+
+
+    string IP_1 = "http://192.168.203.131:8001/?action=stream";//IP_host1
+    string IP_2 = "http://192.168.203.183:8001/?action=stream";//IP_host2
+    string IP_3 = "http://192.168.203.183:8001/?action=stream";//IP_host2
+
+    IP_1 = "http://" + IP_host1 + ":8001/?action=stream";
+    IP_2 = "http://" + IP_host2 + ":8001/?action=stream";
+    IP_3 = "http://" + IP_host3 + ":8001/?action=stream";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="iWash Management System">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative,iWash">
+
+    <link rel="shortcut icon" href="~/content/img/favicon.png">
+
+    <title>iWash Management System</title>
+    <!----- COMMON CSS ----------->
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <link href="~/content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- bootstrap theme -->
+    <link href="~/content/css/bootstrap-theme.css" rel="stylesheet" />
+     <!--external css-->   
+    
+
+
+    <!-- font icon -->
+    
+    <link href="~/content/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="~/content/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- full calendar css-->
+    <link href="~/content/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="~/content/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="~/content/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <!-- owl carousel -->
+    <link href="~/content/css/owl.carousel.css"  rel="stylesheet" >
+    <link href="~/content/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="~/Content/wash/mainw.css" rel="stylesheet" />
+    @*<link href="~/Content/wash/style.css" rel="stylesheet">*@
+    <link href="~/Content/css/fullcalendar.css" rel="stylesheet" >
+    <link href="~/Content/css/widgets.css" rel="stylesheet">
+    
+    
+    <link href="~/Content/css/style-responsive.css" rel="stylesheet" />
+    <link href="~/Content/css/xcharts.min.css" rel="stylesheet">
+    <link href="~/Content/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+
+    <link href="~/Content/chat/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <!-----EOF  COMMON CSS ----------->
+
+   <!----- different CSS for Page-self ----------->
+   @RenderSection("topCSS", false)
+   
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+    <style>
+
+
+    div.cctv 
+    {
+    /*table-layout: fixed;*/
+    
+    width:100% ;/*180px;   inherit*/
+    overflow: hidden;    /*(讓多出來的不顯示。)*/   
+   
+     z-index:-100;
+    }
+
+    img#cctv {
+    max-width: 173px; 
+    width:expression(this.width > 173 ? "173px" : this.width);
+    border: 0 ;
+    margin: 0 ;
+    padding: 0 ;
+    /*width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;*/
+    
+    border-radius: 8%;
+    overflow:hidden;
+    }
+
+    img#cctvZoomIN {
+    max-width: 620px; 
+    width:expression(this.width > 620? "620px" : this.width);
+    border: 0 ;
+    margin: 0 ;
+    padding: 0 ;
+     opacity:0.8;
+    /*width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;*/
+    
+    border-radius: 5%;
+    overflow:hidden;
+    }
+
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <!-- container section start -->
+    <section id="container" class="">
+        
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+
+            <!--logo start-->
+            <a href="/Home/Index" class="logo">I <span class="lite">wash</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                @*<ul class="nav top-menu">
+                        <li>
+                            <form class="navbar-form">
+                                <input class="form-control" placeholder="Search" type="text">
+                            </form>
+                        </li>
+                    </ul>*@
+                <!--  search form end -->
+            </div>
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+
+                    <!-- 通知欄 -->
+                    <!-- task notificatoin end -->
+                    <!-- inbox notificatoin start-->
+                    <li id="mail_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-envelope-l"></i>
+                            <span id="remindN" class="badge bg-important"></span>
+                        </a>
+                        <ul id="remindL" class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-blue"></div>
+                            <li>
+                                <p id="remind" class="blue"></p>
+                            </li>
+                            @*<li>
+                                    <a href="#">
+                                        <span class="photo"><img alt="avatar" src="~/content/member3/member/img/avatar-mini.jpg"></span>
+                                        <span class="subject">
+                                        <span class="from">系統</span>
+                                        </span>
+                                        <span id="remindM" class="message">
+                                            歡迎你，@Model.UserName，初次使用請新增會員資料
+                                        </span>
+                                    </a>
+                                </li>*@
+
+
+                        </ul>
+                    </li>
+                    <!-- inbox notificatoin end -->
+                    <!-- alert notification start-->
+                    <!-- alert notification end-->
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="~/content/member3/member/img/avatar1_small.jpg">
+                            </span>
+                            <span id="Myname" class="username"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li class="eborder-top">
+                                <a href="/User/Edit"><i class="icon_profile"></i> 個人資料</a>
+                            </li>
+                            @*<li>
+                    <a href="#"><i class="icon_mail_alt"></i>我的XX</a>
+                </li>*@
+                            @*<li>
+                    <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                </li>
+                <li>
+                    <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                </li>*@
+                            <li>
+                                <a href="/Home/Logout"><i class="icon_key_alt"></i> 登出</a>
+                            </li>
+
+
+                        </ul>
+                        <!-- notificatoin dropdown end-->
+</div>
+        </header>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<  HEADER END  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+    </section>
+     
+        <!--  ################   SIDE BAR  start  ###########################################-->
+        <aside>
+            <!-- =======   sidebar menu start ============= -->
+
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+
+                    <li class="active">
+                        <a class="" href='@Url.Action("Member","User")'>
+                            <i class="icon_house_alt"></i>
+                            <span>會員首頁</span>
+                        </a>
+                    </li>
+
+                    @*<li class="">
+                        <a class="" href='@Url.Action("Coin","User")'>
+                            <i class="fa fa-usd"></i>
+                            <span>投幣台</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                    </li>*@
+
+                    <li class="sub-menu">
+
+                        <a href="javascript:;" class="">
+                            <i class="icon_profile "></i>
+                            <span>我的專區</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <!---  var fullUrl = this.Url.Action("Edit", "Posts", new { id = 5 }, this.Request.Url.Scheme); --->
+                            <li><a class="" href='@Url.Action("Edit","User")'>
+                                    <i class="icon-envelope-l"></i>
+                                個人信息</a></li>
+                            @{
+                                int infocount = 5;
+                            }
+                            <!-- inbox notificatoin start-->
+
+                            @*<li id="mail_notificatoin_bar" class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <i class="icon-envelope-l"></i>
+                                    <span class="badge bg-important">@infocount</span>
+                                </a>
+                                <ul class="dropdown-menu extended inbox">
+                                    <div class="notify-arrow notify-arrow-blue"></div>
+                                    <li>
+                                        <p class="blue">You have @infocount new messages</p>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+
+                                            <span class="photo"><img alt="avatar" src="~/img/img_member/avatar-mini.jpg"></span>
+                                            <span class="subject">
+                                                <span class="from">Greg  Martin</span>
+                                                <span class="time">1 min</span>
+                                            </span>
+                                            <span class="message">
+                                                I really like this admin panel.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="photo"><img alt="avatar" src="~/img/img_member/avatar-mini2.jpg"></span>
+                                            <span class="subject">
+                                                <span class="from">Bob Mckenzie</span>
+                                                <span class="time">5 mins</span>
+                                            </span>
+                                            <span class="message">
+                                                Hi, What is next project plan?
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="photo"><img alt="avatar" src="~/img/img_member/avatar-mini3.jpg"></span>
+                                            <span class="subject">
+                                                <span class="from">Phillip   Park</span>
+                                                <span class="time">2 hrs</span>
+                                            </span>
+                                            <span class="message">
+                                                I am like to buy this Admin Template.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="photo"><img alt="avatar" src="~/img/img_member/avatar-mini4.jpg"></span>
+                                            <span class="subject">
+                                                <span class="from">Ray   Munoz</span>
+                                                <span class="time">1 day</span>
+                                            </span>
+                                            <span class="message">
+                                                Icon fonts are great.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">See all messages</a>
+                                    </li>
+                                </ul>
+                            </li>*@
+                           
+                            
+                             <!-- inbox notificatoin end -->
+                            <li><a class="" href='@Url.Action("Safe","User")'>                                
+                                    <i class="fas fa-shield-check"></i>                    
+                                                        帳戶安全</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="fa fa-laptop"></i>
+                            <span>帳戶管理</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            
+                            <li>
+                                <a href='@Url.Action("Credit","User")'><i class="fa fa-usd"></i>帳戶餘額查詢</a>
+                            </li>
+                            <li>
+                                <a class="" href='@Url.Action("ShoppingSheet","User")'><i class="fa fa-shopping-bag"></i>
+                                消費紀錄明細</a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("CouponCheck","User")'><i class="fa fa-gift"></i>優惠點數查詢</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+
+                    <!-- %%%%%%%%%%%  CCTV  START %%%%%%% fa-store-alt  %%%%  -->
+                    <li class="sub-menu" >
+                        <a  href='#cctv'>
+                            <i class="fa fa-camera "></i>
+                            <span>店內 CCTV 實況</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li  >  
+                            <!---     --->
+                                <div class="cctv"   >
+                                    @*<img id="cctv" src=@IP_1  />*@
+                                </div>
+                                                        
+                            <!---     --->
+                            </li>
+                            <li><a id="tvZooIN" href="#">放大畫面</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- %%%%%%%%%%%%% CCTV  END %%%%%%%%%%%%  -->
+
+                </ul>
+                <!--  ################   SIDE BAR  end  ##############################################-->
+           
+               
+            </div>
+
+            <!-- =======   sidebar menu end ============= -->
+            
+                    
+        </aside>
+        
+        <!--  ################   sidebar end     ############################################-->
+       
+        <!--  %%%%%%%%%%%%%%%%%%   main content start   %%%%%%%%%%%%%%%%  -->
+       <section id="main-content">
+        <section class="wrapper">
+            <!--overview start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">
+                        <i class="fa fa-laptop"></i> 智慧洗衣助理
+                    </h3>
+                    @RenderSection("pBreadCrumb", false)
+                </div>
+            </div>
+            <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[START BODY of EACH Page ]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+            <div class="row">
+                <input type="text" id="Uname" readonly style="display:none" value="@Model.Name" />
+                <input id="times" style="display:none" value="@Model.Times" />
+                <input id="access" style="display:none" value="@Model.Access" />
+                @*<button class="btn-primary" id="debug"><i class="fas fa-paper-plane"></i></button>
+                <div id="deb">55555555555555</div>*@
+            </div>
+
+
+            @RenderBody()
+
+            <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[ EOF BODY of EACH Page ] %%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+            <!--  %%%%%%%%%%%%%%%%%%   main content end    %%%%%%%%%%%%%%%% -->
+        </section>  
+    </section>
+    <!-- container section start -->
+    <!--================FEEDBACK Modal =============== START ===============-->
+    <!--css样式-->
+    <style type="text/css">
+
+
+       
+		
+			.mybtn{ 
+                position:fixed; 
+                right:10px; 
+                bottom:20px; 
+                display:block; 
+                width:50px; 
+                height:50px;
+                border-radius:50px; 
+                padding:0px; 
+                text-align:center; 
+                line-height:50px;
+
+			}
+			
+			.modal.left .modal-dialog,
+			.modal.right .modal-dialog {
+				position: fixed;
+				margin: 0;
+
+				width: 640px;
+				height: 100%;
+				-webkit-transform: translate3d(0%, 0, 0);
+					-ms-transform: translate3d(0%, 0, 0);
+					 -o-transform: translate3d(0%, 0, 0);
+						transform: translate3d(0%, 0, 0);
+			}
+		
+			.modal.left .modal-content,
+			.modal.right .modal-content {
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.modal.left .modal-body,
+			.modal.right .modal-body {
+				padding: 0px;
+			}
+		
+			/*Left*/
+			.modal.left.fade .modal-dialog{
+				left: -700px;
+				-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+				   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+					 -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+						transition: opacity 0.3s linear, left 0.3s ease-out;
+			}
+			
+			.modal.left.fade.in .modal-dialog{
+				left: 180px;
+			}
+				
+			/*Right*/
+			.modal.right.fade .modal-dialog {
+				right: -640px;
+				-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+				   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+					 -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+						transition: opacity 0.3s linear, right 0.3s ease-out;
+			}
+			
+			.modal.right.fade.in .modal-dialog {
+				right: 0;
+			}
+		
+			/* ----- MODAL STYLE ----- */
+			.modal-content {
+				border-radius: 0;
+				border: none;
+                overflow: hidden;
+			}
+		
+			.modal-header {
+				border-bottom-color: #EEEEEE;
+				background-color: #2e3b46;
+                height: 60px;
+               
+			}
+
+		</style>
+
+    <div class="modal left fade" id="CCTV_Modal" tabindex="-1" role="dialog" 
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"  >
+                    <h4 class="modal-title" id="myModalLabel">公益店</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" >&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @*<img id="cctvZoomIN" src=@IP_1 />*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--============================ 結帳 OK  FEEDBACK Modal ==========  END    ==============-->
+    <!-- common   javascripts for all pages-->
+
+    <!-- jquery 3.3.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- singalR  start ===================-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.3.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/Store.js"></script>
+    <script src="~/Scripts/maincoin.js"></script>
+    <script src="~/Scripts/SignalRcoin.js"></script>
+    <!-- singalR  end =====================-->
+
+    <script src="~/Scripts/owl.carousel.js"></script>
+    <script src="~/Scripts/js/jquery.customSelect.min.js"></script>
+    <script src="~/Scripts/js/gdp-data.js"></script>
+    <script src="~/Scripts/js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/Scripts/js/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- bootstrap -->
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="~/Scripts/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!-- charts scripts -->
+    <script src="~/content/assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="~/Scripts/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="~/content/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+
+    <!-- jQuery full calendar -->
+
+    <script src="~/Scripts/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="~/content/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="~/Scripts/js/calendar-custom.js"></script>
+    <script src="~/Scripts/js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+
+    <script src="~/content/assets/chart-master/Chart.js"></script>
+
+    <!--custome script for all page-->
+    <script src="~/Scripts/js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="~/Scripts/js/sparkline-chart.js"></script>
+    <script src="~/Scripts/js/easy-pie-chart.js"></script>
+
+    <script src="~/Scripts/js/xcharts.min.js"></script>
+    <script src="~/Scripts/js/jquery.autosize.min.js"></script>
+    <script src="~/Scripts/js/jquery.placeholder.min.js"></script>
+
+    <script src="~/Scripts/js/morris.min.js"></script>
+    <script src="~/Scripts/js/sparklines.js"></script>
+    <script src="~/Scripts/js/charts.js"></script>
+    <script src="~/Scripts/js/jquery.slimscroll.min.js"></script>
+
+    @RenderSection("endJS", false) 
+
+    <script>
+        $(document).ready(function () {
+            var sename = $("#Uname").val();
+            $("#Myname").html(sename);
+
+        });
+        $(function () {
+          
+            $("a#tvZooIN").click(function () {
+
+               // $("#sidebar > ul > li:nth-child(5) > a > span:nth-child(2)").t
+               // alert("ZOON_IN");
+                $('#CCTV_Modal').modal('toggle');
+
+            });
+
+
+
+            //  <img id="cctv" src=@IP_1 style="width: 100%; height: 250px;border-radius: 8%;" />
+            //$("img#cctv").attr('src', '@IP_1');
+
+            //========== CCTV switch control  ===================================
+
+
+            $("#cctv1").click(function () {
+
+
+
+                alert("逢甲店 : IP: @IP_host2");
+
+                $('img#cctv').attr('src', '@IP_2');
+
+            });//--------------------------------------------------------
+
+            $("#cctv2").click(function () {
+
+                alert("公益店  : IP: @IP_host1 ");
+                $('img#cctv').attr('src', '@IP_1');
+
+            });
+
+            //----------------------------------------------------------
+            $("#cctv3").click(function () {
+
+                // alert("興大店  :   coming soon ~     IP: 192.168.203.xx");
+                alert("興大店 : IP: @IP_host3");
+                // $('img#cctv').attr('src', 'http://192.168.1.2:8001/?action=stream');
+                $('img#cctv').attr('src', '@IP_3');
+
+            });
+
+
+
+
+            //-------------------------------------
+
+            //$('#CCTV_Modal').modal('toggle');
+
+
+
+
+
+        });
+
+    </script>
+    
+
+
+</body>
+</html>
+

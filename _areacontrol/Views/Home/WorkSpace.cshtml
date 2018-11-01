@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "WorkSpace";
+}
+
+<div class="inputarea">
+    <div class="tables">
+        <div class="item"><label class=ilabel for="">區域</label><input class=itext type="text" id="Aname" placeholder="Name"></div>
+        <div class="item"><label class=ilabel for="">列數</label><input class=itext type="text" id="rowNumber"></div>
+        <div class="item"><label class=ilabel for="">行數</label><input class=itext type="text" id="colNumber"></div>
+        <div class="item"><label class=ilabel for="">高度</label><input class=itext type="text" id="heig" placeholder="100"></div>
+        <div class="item"><label class=ilabel for="">寬度</label><input class=itext type="text" id="widt" placeholder="100"></div>
+        <div class="item"><label class=ilabel for="">上下間隔</label><input class=itext type="text" id="btdis" placeholder="2"></div>
+        <div class="item"><label class=ilabel for="">左右間隔</label><input class=itext type="text" id="rtdis" placeholder="2"></div>
+        
+    </div>
+    <div style="text-align:right; margin-top:15px">
+        <button id="go">GO</button>&nbsp&nbsp<button id="clear">Empthy</button>&nbsp&nbsp<button id="Savediv">Save</button>
+
+    </div>
+
+    <div class="draw">
+        <div class="row">
+        </div>
+        <div class="row">
+        </div>
+    </div>
+    <form id="Hi" style="display:none;">
+        <input id="DivName" name="AreaName">
+        <input id="DivNum"name="DivID">
+        <input id="DivOpa" name="Opa">
+        <input id="DivPic" name="Pic">
+    </form>
+    <div id="debug">&nbsp</div>
+</div>
+<script>
+
+    var owr =@Session["UserID"];
+</script>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+<script src="~/Scripts/jquery.reflection.js"></script>
+<script src="~/Scripts/jquery.cloud9carousel.js"></script>
+<script src="~/Scripts/main3d.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/wrkspace.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/SignalR.js"></script>
+
+

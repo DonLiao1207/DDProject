@@ -1,0 +1,75 @@
+﻿@model IEnumerable<_AreaControl.Models.Area>
+
+@{
+    ViewBag.Title = "Object";
+}
+
+<h2>物件</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AreaName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BtDis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RtDis)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BtDis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RtDis)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AreaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AreaID })
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+<script src="~/Scripts/jquery.reflection.js"></script>
+<script src="~/Scripts/jquery.cloud9carousel.js"></script>
+<script src="~/Scripts/main3d.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/main.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/SignalR.js"></script>
+<script>
+    $(document).ready(function () {
+    $(".jumbotron").fadeOut(50);
+    $("#jout").show(1000);
+    
+});
+</script>

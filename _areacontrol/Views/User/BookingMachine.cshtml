@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "BookingMachine";
+    Layout = "~/Views/Shared/_Memlayout.cshtml";
+}
+
+
+@section pBreadCrumb{
+    <ol class="breadcrumb">
+
+        @*<li><i class="fa fa-th-large  fa-spin"></i></li>*@
+
+        @*<li class="breadcrumb-item"><a href="#">會員專區</a></li>*@
+        <li class="breadcrumb-item " aria-current="page">預約機器檢視</li>
+    </ol>
+}
+<!----- ############################################################  ------>
+
+<style>
+    td {
+        text-align: center;
+        height: 44px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+    }
+
+    .machine {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+
+
+
+<!--One Start .row -->
+<div class="row">
+
+    <!-- Start .row1 -->
+    <div class="col-lg-7 col-md-7 sortable-layout" style="min-height:600px;" id="was">
+        <!-- Start col-lg-6 -->
+        <div class="panel panel-teal toggle panelMove panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="fa fa-eye-slash x1"></i> <span id="cctv1">逢甲店</span> &nbsp;<i class="fa fa-eye x2"></i> &nbsp;<span id="cctv2">公益店</span>&nbsp;<i class="fa fa-eye-slash x1"></i> &nbsp;<span id="cctv3">興大店</span> </h4>
+            </div>
+            <div class="panel-body">
+                <div id="stats-pageviews" style="width: 100%; height: 500px;">
+                    <div class="draw">
+
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W1號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display:block; margin:auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W2號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W3號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W4號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="D1號機" src="~/img/Dryer_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="D2號機" src="~/img/Dryer_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="use" id=wAtext>可使用...</td>
+                                    <td class="use" id=wBtext>可使用...</td>
+                                    <td class="use" id=wCtext>可使用...</td>
+
+                                    <td class="use" id=D1text>可使用...</td>
+                                    <td class="use" id=D2text>可使用...</td>
+                                    <td class="use" id=D3text>可使用...</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <table border="1" style="margin-top: 145px;">
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W5號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display:block; margin:auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W6號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W7號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="W8號機" src="~/img/wash_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="D3號機" src="~/img/Dryer_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                    <th>
+                                        <img id="wimg" data-toggle="tooltip" data-placement="top" title="D4號機" src="~/img/Dryer_Machine.png" class="machine"
+                                             style="display: block; margin: auto;" />
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="use" id=wDtext>可使用...</td>
+                                    <td class="use" id=wEtext>可使用...</td>
+                                    <td class="use" id=wFtext>可使用...</td>
+
+                                    <td class="use" id=wGtext>可使用...</td>
+                                    <td class="use" id=wHtext>可使用...</td>
+                                    <td class="use" id=D4text>可使用...</td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="panel-footer teal-bg">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile teal m0">
+                        <div class="tile-content text-center pl0 pr0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile teal m0">
+                        <div class="tile-content text-center pl0 pr0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile teal m0">
+                        <div class="tile-content text-center pl0 pr0">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile teal m0">
+                        <div class="tile-content text-center pl0 pr0">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- End .panel -->
+    </div>
+    <!-- End .row 1 -->
+</div>
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->

@@ -1,0 +1,174 @@
+﻿@model _AreaControl.Models.UserList
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+
+    <title>會員登入</title>
+
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- //Meta-Tags -->
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Content/log/css/style.css" type="text/css" media="all">
+
+</head>
+<!-- //Head -->
+<!-- Body -->
+<body>
+
+    <h1>會員登入</h1>
+
+    <div class="container w3layouts agileits">
+        <div class="login w3layouts agileits">
+            <h2>登入</h2>
+            <form id="loginForm">
+                <input type="text" name="Email" id="logEmail" placeholder="信箱" />
+
+                <input type="password" name="Password" id="logPssword" placeholder="密碼" />
+            </form>
+            <ul class="tick w3layouts agileits">
+                <li>
+                    <div id="msg"><ul style="font-size:20px;color:#ff827f;">帳號或密碼錯誤!</ul></div>
+                </li>
+            </ul>
+            <div class="send-button w3layouts agileits">
+                <p id="StatusM" />
+                <form class="form-group" method="post" name="login">
+                    <input type="button" value="登入" onclick="Login()">
+                </form>
+            </div>
+        </div>
+        <div class="register w3layouts agileits">
+            <h2>註冊</h2>
+            <div id="message1">
+                <div class="alert alert-success">
+                    <i class="fas fa-check"></i><strong>
+                        成功<br />
+                        認證信已經寄出到你的信箱<br />
+                        請確認!
+                    </strong>
+                </div>
+            </div>
+            <div id="message2">
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-remove"></span><strong>錯誤!註冊失敗</strong>
+                </div>
+            </div>
+            <form id="Registration">
+                <input type="text" name="Email" id="EmailR" placeholder="信箱" onchange="UserCheck()" />
+                
+                <input type="text" name="Username" placeholder="姓名" required="" id="user" />
+                <input type="password" name="Password" placeholder="密碼" required="" id="Password">
+                <p id="Status" />
+            </form>
+            <div class="send-button w3layouts agileits">
+                <form>
+                    <input type="button" value="註冊" onclick="SaveForm()">
+                </form>
+
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+    <div class="clear"></div>
+
+    <div class="footer w3layouts agileits">
+
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+            $(document).ready(function () {
+                $('#lout').hide();
+                $("#message1").hide();
+                $("#message2").hide();
+            });
+            function SaveForm() {
+                var name = $("#user").val();
+                var pwd = $("#Password").val();
+                var email = $("#Email").val();
+
+                if (name == "" || pwd == "" || email == "") {
+                    $("#message1").hide();
+                    $("#message2").show();
+                    return false;
+                }
+                var data = $("#Registration").serialize();
+
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/Register/SaveData",
+                    success: function (result) {
+
+                        $("#message1").show();
+                        $("#message2").hide();
+                        $("#Registration")[0].reset();
+                        $("#Status").hide();
+                    }
+                });
+            }
+
+            //Login System
+            $("#msg").hide();
+
+            var Login = function () {
+
+                $("#StatusM").html("Checking...");
+                var data = $("#loginForm").serialize();
+                
+                $.ajax({
+                    type: "post",
+                    url: "/Register/CheckValidUser",
+                    data: data,
+                    success: function (result) {
+                        if (result == "Fail") {
+                            alert("Fail")
+                            $("#loginForm")[0].reset();
+                            $("#msg").show();
+                            $("#StatusM").hide();
+                            return false;
+                        }
+                        else {
+                            window.location.href = "/User/Member";
+                            $("#msg").hide();
+                            return true;
+                        }
+                    }
+                })
+            }
+
+            //UserCheck
+            function UserCheck() {
+                $("#Status").html("Checking...");
+                $.post("@Url.Action("CheckUsernameAvailability", "Register")",
+                    {
+                        userdata: $("#EmailR").val()
+                    },
+                function (data) {
+                    if (data == 0) {
+                        $("#Status").html('<font color="Green">你可以使用這個帳號</font>');
+                        $("#Username").css("border-color", "Green");
+
+                    }
+                    else {
+                        $("#Status").html('<font color="Red">此帳號已被註冊!請再換一個重試</font>');
+                        $("#EmailR").css("border-color", "Red");
+                    }
+                });
+            }
+    </script>
+
+</body>
+<!-- //Body -->
+
+</html>

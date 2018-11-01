@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DDSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Owner" Type="int" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Row" Type="int" />
+          <Property Name="Col" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Width" Type="int" />
+          <Property Name="BtDis" Type="int" />
+          <Property Name="RtDis" Type="int" />
+        </EntityType>
+        <EntityType Name="AreaContent">
+          <Key>
+            <PropertyRef Name="ListID" />
+          </Key>
+          <Property Name="ListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DivID" Type="int" />
+          <Property Name="Opa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pic" Type="nvarchar(max)" />
+          <Property Name="Data" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Isvalid" Type="bit" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="14" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Credit" Type="nchar" MaxLength="10" />
+          <Property Name="Total" Type="nchar" MaxLength="100" />
+          <Property Name="Times" Type="nchar" MaxLength="10" />
+          <Property Name="Access" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Area_UserList">
+          <End Role="UserList" Type="Self.UserList" Multiplicity="0..1" />
+          <End Role="Area" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AreaContent_AreaContent">
+          <End Role="AreaContent" Type="Self.AreaContent" Multiplicity="1" />
+          <End Role="AreaContent1" Type="Self.AreaContent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AreaContent">
+              <PropertyRef Name="ListID" />
+            </Principal>
+            <Dependent Role="AreaContent1">
+              <PropertyRef Name="ListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DDSModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaContent" EntityType="Self.AreaContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Area_UserList" Association="Self.FK_Area_UserList">
+            <End Role="UserList" EntitySet="UserList" />
+            <End Role="Area" EntitySet="Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AreaContent_AreaContent" Association="Self.FK_AreaContent_AreaContent">
+            <End Role="AreaContent" EntitySet="AreaContent" />
+            <End Role="AreaContent1" EntitySet="AreaContent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Owner" Type="Int32" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Row" Type="Int32" />
+          <Property Name="Col" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="BtDis" Type="Int32" />
+          <Property Name="RtDis" Type="Int32" />
+          <NavigationProperty Name="UserList" Relationship="DDSModel.FK_Area_UserList" FromRole="Area" ToRole="UserList" />
+        </EntityType>
+        <EntityType Name="AreaContent">
+          <Key>
+            <PropertyRef Name="ListID" />
+          </Key>
+          <Property Name="ListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DivID" Type="Int32" />
+          <Property Name="Opa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AreaContent1" Relationship="DDSModel.FK_AreaContent_AreaContent" FromRole="AreaContent" ToRole="AreaContent1" />
+          <NavigationProperty Name="AreaContent2" Relationship="DDSModel.FK_AreaContent_AreaContent" FromRole="AreaContent1" ToRole="AreaContent" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Isvalid" Type="Boolean" />
+          <NavigationProperty Name="Areas" Relationship="DDSModel.FK_Area_UserList" FromRole="UserList" ToRole="Area" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Credit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Total" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Times" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Access" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DDSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="AreaContents" EntityType="Self.AreaContent" />
+          <EntitySet Name="UserLists" EntityType="Self.UserList" />
+          <AssociationSet Name="FK_Area_UserList" Association="DDSModel.FK_Area_UserList">
+            <End Role="UserList" EntitySet="UserLists" />
+            <End Role="Area" EntitySet="Areas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AreaContent_AreaContent" Association="DDSModel.FK_AreaContent_AreaContent">
+            <End Role="AreaContent" EntitySet="AreaContents" />
+            <End Role="AreaContent1" EntitySet="AreaContents" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Area_UserList">
+          <End Type="DDSModel.UserList" Role="UserList" Multiplicity="0..1" />
+          <End Type="DDSModel.Area" Role="Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AreaContent_AreaContent">
+          <End Type="DDSModel.AreaContent" Role="AreaContent" Multiplicity="1" />
+          <End Type="DDSModel.AreaContent" Role="AreaContent1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AreaContent">
+              <PropertyRef Name="ListID" />
+            </Principal>
+            <Dependent Role="AreaContent1">
+              <PropertyRef Name="ListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DDSModelStoreContainer" CdmEntityContainer="DDSEntities">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="DDSModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Col" ColumnName="Col" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="BtDis" ColumnName="BtDis" />
+                <ScalarProperty Name="RtDis" ColumnName="RtDis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreaContents">
+            <EntityTypeMapping TypeName="DDSModel.AreaContent">
+              <MappingFragment StoreEntitySet="AreaContent">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="ListID" ColumnName="ListID" />
+                <ScalarProperty Name="DivID" ColumnName="DivID" />
+                <ScalarProperty Name="Opa" ColumnName="Opa" />
+                <ScalarProperty Name="Pic" ColumnName="Pic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLists">
+            <EntityTypeMapping TypeName="DDSModel.UserList">
+              <MappingFragment StoreEntitySet="UserList">
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Isvalid" ColumnName="Isvalid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

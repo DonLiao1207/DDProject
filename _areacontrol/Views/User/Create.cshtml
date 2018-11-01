@@ -1,0 +1,97 @@
+﻿@model _AreaControl.Models.UserList
+
+@{
+    Layout = "~/Views/Shared/_Memlayout.cshtml";
+}
+
+
+<body>
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>UserList</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="control-label col-md-2" >真實姓名</label>
+                <div id="callname" class="col-md-10" style="margin-top:6px;">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">連絡電話</label>
+                <div id="callname" class="col-md-10" style="margin-top:6px;">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">聯絡地址</label>
+                <div id="callname" class="col-md-10" style="margin-top:6px;">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Isvalid, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Isvalid)
+                        @Html.ValidationMessageFor(model => model.Isvalid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+
+
+
+    <script>
+        //$(document).ready(function () {
+        //    if ($("#Myname").text() == "新會員") {
+        //        alert("您好，請新增會員資料");
+        //    }
+        //    $("#callname").html($("#Myname").text());
+        //})
+    </script>
+</body>
+

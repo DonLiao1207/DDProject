@@ -1,0 +1,209 @@
+﻿@model _AreaControl.Models.UserList
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理系統</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/Login.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/common.css">
+</head>
+<body>
+    <!--BOOTSTRAP START-->
+    <!--主選單-->
+    @*<div class="jumbotron">*@
+    <div class="container w3layouts agileits">
+        <div class="login w3layouts agileits">
+            <div class="container">
+                <div class="col-md-4 col-md-offset-2">
+                    <h3 class="text-center" style="font-size:40px;color:#68ea68; font-weight:900;margin-top:1px;margin-bottom:45px;">登入</h3>
+                    <form id="loginForm">
+                        <div id="msg"><ul style="font-size:20px;color:#ff827f;">帳號或密碼錯誤!</ul></div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="far fa-envelope"></i></span>
+                                <input class="form-control" type="email" name="Email" id="logEmail" placeholder="信箱" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input class="form-control" type="password" name="Password" id="logPssword" placeholder="密碼" />
+                            </div>
+                        </div>
+                    </form>
+                    <p id="StatusM" />
+                    <div class="form-group">
+                        <button class="btn btn-info form-control" type="submit" onclick="Login()"><i class="fas fa-sign-in-alt"></i> 登入</button>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group;" style="margin-top:15%;">
+                        <span style="font-size:30px;color:#000; font-weight:900;">還不是會員?&nbsp&nbsp&nbsp</span><a style="cursor:pointer; color:white; font-size:20px;" onclick="SignUp()">現在註冊 <i class="fas fa-user-plus"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        
+        
+        <!--Register-->
+
+        <div class="modal fade" id="ShowModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h4 style="font-size:40px;color:#4b6ca7; font-weight:900;">註冊新用戶</h4>
+                        <div id="message1">
+                            <div class="alert alert-success">
+                                <i class="fas fa-check"></i><strong>
+                                    成功<br />
+                                    認證信已經寄出到你的信箱<br />
+                                    請確認!
+                                </strong>
+                            </div>
+                        </div>
+                        <div id="message2">
+                            <div class="alert alert-danger">
+                                <span class="glyphicon glyphicon-remove"></span><strong>錯誤!註冊失敗</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form id="Registration">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="far fa-envelope"></i></span>
+                                    <input class="form-control" type="email" name="Email" id="Email" placeholder="信箱" onchange="UserCheck()" />
+                                    <p id="Status" />
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fas fa-user-alt"></i></span>
+                                    <input class="form-control" type="text" name="Username" id="user" placeholder="用戶" />
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                    <input class="form-control" type="password" name="Password" id="Password" placeholder="密碼" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <button class="btn btn-info form-control" type="submit" onclick="SaveForm()"><i class="fas fa-angle-double-right"></i>註冊</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+
+        </div>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.reflection.js"></script>
+        <script src="~/Scripts/jquery.cloud9carousel.js"></script>
+        <script src="~/Scripts/main3d.js"></script>
+        <script src="~/Scripts/main.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+
+
+
+        <script>
+            $(document).ready(function () {
+                $('#lout').hide();
+            });
+
+
+            function SignUp() {
+                $("#ShowModal").modal();
+                $("#message1").hide();
+                $("#message2").hide();
+            }
+
+            function SaveForm() {
+                var name = $("#user").val();
+                var pwd = $("#Password").val();
+                var email = $("#Email").val();
+
+                if (name == "" || pwd == "" || email == "") {
+                    $("#message1").hide();
+                    $("#message2").show();
+                    return false;
+                }
+                var data = $("#Registration").serialize();
+
+                $.ajax({
+                    type: "post",
+                    data: data,
+                    url: "/Register/SaveData",
+                    success: function (result) {
+
+                        $("#message1").show();
+                        $("#message2").hide();
+                        $("#Registration")[0].reset();
+                        $("#Status").hide();
+                    }
+                });
+            }
+
+            //Login System
+            $("#msg").hide();
+
+            var Login = function () {
+                $("#StatusM").html("Checking...");
+                var data = $("#loginForm").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "/Register/CheckValidUser",
+                    data: data,
+                    success: function (result) {
+                        if (result == "Fail") {
+                            $("#loginForm")[0].reset();
+                            $("#msg").show();
+                            $("#StatusM").hide();
+                        }
+                        else {
+                            window.location.href = "/Home/Index";
+                            $("#msg").hide();
+                        }
+                    }
+                })
+            }
+
+            //UserCheck
+            function UserCheck() {
+                $("#Status").html("Checking...");
+                $.post("@Url.Action("CheckUsernameAvailability", "Register")",
+                    {
+                        userdata: $("#Email").val()
+                    },
+                function (data) {
+                    if (data == 0) {
+                        $("#Status").html('<font color="Green">你可以使用這個帳號</font>');
+                        $("#Username").css("border-color", "Green");
+
+                    }
+                    else {
+                        $("#Status").html('<font color="Red">此帳號已被註冊!請再換一個重試</font>');
+                        $("#Email").css("border-color", "Red");
+                    }
+                });
+            }
+        </script>
+
+
+</body>
+</html>

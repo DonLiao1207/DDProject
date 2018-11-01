@@ -1,0 +1,107 @@
+﻿@model List<_AreaControl.Models.Area>
+
+@{
+    ViewBag.Title = "Check";
+}
+<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Select Basic -->
+        <div class="form-group" style="height:39px!important;">
+            
+            <label class="col-md-4 control-label" for="selectbasic">選擇畫面</label>
+            <div class="col-md-6">
+                <select id="se" name="se" class="form-control" onchange="Draw()">
+                    @foreach (var A in Model) {
+                    <option value="" id="@A.AreaID">@A.AreaName</option>
+                    }
+                </select>
+                <p id="ind" style="display:none;"/>
+                @foreach (var A in Model) {
+                <Input type="text" style="display:none;" id="R_@A.AreaID" value="@A.Row" />
+                <Input type="text" style="display:none;" id="A_@A.AreaID" value="@A.Col" />
+                <Input type="text" style="display:none;" id="H_@A.AreaID" value="@A.Height" />
+                <Input type="text" style="display:none;" id="W_@A.AreaID W" value="@A.Width" />
+                <Input type="text" style="display:none;" id="B_@A.AreaID B" value="@A.BtDis" />
+                <Input type="text" style="display:none;" id="T_@A.AreaID T" value="@A.RtDis" />
+
+                }
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+   
+        
+           
+
+            
+       
+   
+<div class="draw">
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+<script src="~/Scripts/jquery.reflection.js"></script>
+<script src="~/Scripts/jquery.cloud9carousel.js"></script>
+<script src="~/Scripts/main3d.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/wrkspace.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/SignalR.js"></script>
+
+<script>
+    $("#se").change(function () {
+        
+        var txt = $("#se :selected").text();
+        alert(txt);
+        rowNumber = 
+        colNumber = $("#colNumber").val();
+
+        for (var i = 0; i < rowNumber; i++) {
+
+            var row = document.createElement("div");
+            row.className = "row";
+
+            for (var j = 0; j < colNumber; j++) {
+                var col = document.createElement("div");
+
+                var colH = $('#widt').val();
+                var colW = $('#heig').val();
+                var colBt = $('#btdis').val();
+                var colRt = $('#rtdis').val();
+
+
+                col.className = "col";
+
+                col.setAttribute("id", divID);
+
+
+                UserArea.push({ id: divID, opa: 1 });
+
+
+                divID = divID + 1;
+
+                $(col).css({
+                    'width': colH,
+                    'height': colW,
+                });
+
+                $(col).css("margin-bottom", colBt + "px");
+                $(col).css("margin-right", colRt + "px");
+
+                row.appendChild(col);
+            }
+
+            $(".draw").append(row);
+
+            //     $('.col').dblclick(function(){
+        }
+    })
+</script>

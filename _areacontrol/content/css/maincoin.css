@@ -1,0 +1,16 @@
+﻿@keyframes using {
+    from {background-color: rgba(190, 43, 35, 0.7)!important;}
+    to {background-color: rgba(227, 151, 147, 0.7)!important;}
+}
+
+@keyframes useable {
+    from {background-color: rgba(163, 222, 100, 0.7);}
+    to {background-color: rgba(210, 227, 211, 0.6);}
+}
+
+
+.use{
+  animation-name:useable;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}

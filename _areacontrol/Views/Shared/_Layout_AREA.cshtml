@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>管理系統</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/common.css">
+</head>
+<body>
+    <!--BOOTSTRAP START-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">DD</a>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home/Index"><span id="Wicon" class="fas fa-home"></span></a></li>
+                    <li><a href="/Home/WorkSpace"><span id="Wicon" class="fas fa-book-open"></span></a></li>
+                    @*<li><a href="/Home/Login"><span id="Wicon" class="fas fa-users-cog"></span></a></li>*@
+                    <!--3462-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Element<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="lout"><a href="/Home/Logout">登出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!--主選單-->
+    <div class="jumbotron">
+        <!--containerStart-->
+        <p id="item-title">&nbsp;</p>
+        <div class="container">
+            <!--3D動態按鈕-->
+            <!--<div class="wrap">-->
+            <div class="col-sm-2">
+                <h1>
+                    Hello, @Session["UserName"] !
+                    <br/>請選擇
+                    <br />
+                    <input type="text" id="Uname" readonly style="display:none" value="@Session["UserName"]"/>
+                    <a class="btn btn-primary btn-lg" role="button" id="hidej">隱藏主選單</a>
+                </h1>
+                <br />
+                <br />
+            </div>
+            <div id="showcase" class="noselect col-sm-9">
+                <a href="/Home/Index"><img class="cloud9-item" src="~/Content/image/home.png" alt="主頁"></a>
+                <img class="cloud9-item" src="~/Content/image/chart.png" alt="分析">
+                <a href="/Home/WorkSpace"><img class="cloud9-item" src="~/Content/image/monitor.png" alt="監控"></a>
+                <a href="/Home/Object"><img class="cloud9-item" src="~/Content/image/object.png" alt="物件"></a>
+                <img class="cloud9-item" src="~/Content/image/setting.png" alt="設定">
+                <img class="cloud9-item" src="~/Content/image/mail.png" alt="Mail">
+            </div>
+            <!--</div>-->
+            <footer>
+
+                <div id="navv" class="noselect" style="display:none;">
+                    <button class="left">
+                        ←
+                    </button>
+                    <button class="right">
+                        →
+                    </button>
+                </div>
+            </footer>
+        </div>
+        <!--containerEnd-->
+    </div>
+
+    <div id="jout">
+        <a href="#"><span class="fas fa-angle-double-left" id="showj" style="font-size:30px;color:rgba(53, 56, 53, 0.7);">主選單</span></a>
+    </div>
+
+
+    <!--聊天室-->
+    <!--bootstrap 3746-->
+
+    <a href=# role="button" class="talkout"><i class="fas fa-comment-alt talk">chat</i></a>
+
+    <nav id="room" class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid Tcontainer">
+            <div class="chatR col-sm-9">
+                <ul id="discussion"></ul>
+            </div>
+            <div class="chatR col-sm-3">
+                <ul id="nameL" style="list-style-type:none"></ul>
+            </div>
+
+            <input type="text" id="message" style="width:84%; display:flex; float:left;" name="" />
+            <input id="sendmessage" type="button" class="send" value="傳送" name="" />
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+﻿
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    // HOME ----Index PAGE ----
+
+}
+
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[START BODY of EACH Page ]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+ @section logo{
+
+<div id="qrcDIV" class="logo-area">
+
+    <img id="qrcIMG" src="~/Content/img/logo-iWash.jpg" alt="QR CODE 登入" />
+
+
+</div>
+}
+
+@section HeroSlider{
+<section class="hero-section">
+    
+    <!-- left social link ber -->
+    <div class="left-bar">
+        <div class="left-bar-content">
+            <div class="social-links">
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- hero slider area -->
+    <div class="hero-slider">
+
+        <div class="hero-slide-item set-bg" data-setbg="/Content/img/mainPage.jpg">
+            <div class="slide-inner">
+                <div class="slide-content">
+                    <h2>智慧洗衣助理 <br>Smart laundry assistant<br></h2>
+                    <a  class="site-btn sb-light">了解更多</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-slide-item set-bg" data-setbg="/Content/img/minorPage.png">
+            <div class="slide-inner">
+                <div class="slide-content">
+                    <h2>智慧好生活<br />便利新科技</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-num-holder" id="snh-1"></div>
+
+</section>
+    <!-- Hero section end -->
+
+}
+<!-- Intro section start -->
+<section class="intro-section pt100 pb50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 intro-text mb-5 mb-lg-0">
+                <h2 class="sp-title">物聯網洗衣平臺<br />-讓洗衣服務更便利安全</h2>
+                <p>您是否在自助洗衣時最擔心在洗衣過程衣物遭竊，且需在現場等待？，i wash 快洗衣，開發「智慧洗衣助理」，透過「i wash洗衣監控」app，即可掌握自助洗衣店內的設備運轉狀態,遇上尖峰時段全店客滿的情況，可設定手機推播訊息，一有空機馬上手機通知前往使用,為保障洗衣安全,設備啟動之後，一有任何開、關機門的動作，都會透過手機訊息提醒，即使在洗衣途中離開，也能隨時掌握設備狀態，省去擔心衣服被竊的疑慮。 </p>
+                <a id="contactUS" class="site-btn sb-dark">了解詳情</a>
+            </div>
+            <div class="col-lg-5 pt-4">
+                <img src="~/content/img/wifi.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+<!-- start contact us Section   style="display:none" -->
+
+
+    <!--==================== FEEDBACK Modal =============== START ===============-->
+
+@*<section id="ctn_sec ">*@
+    <div class="modal left fade" id="ContactModal" tabindex="-1" role="dialog" 
+         aria-labelledby="myModalLabel"   aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content  clearfix">
+             
+                    <div class="modal-body  clearfix ">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs12 ">
+                                <div style="text-align:center;padding:100px;display:block">
+                                    <h2>Contact Info</h2>
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6 ">
+                                <div id="cnt_form">
+                                    <form id="contact-form" class="contact" name="contact-form" method="post" action="send-mail.php">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control name-field" required="required" placeholder="Your Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control mail-field" required="required" placeholder="Your Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="message" id="message" required class="form-control" rows="8" placeholder="Message"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class=""><!-- cnt_info ---->
+                                    <ul>
+                                        <li><p><i class="fa fa-facebook"></i><a href="https://www.facebook.com/groups/SMIT006/?ref=bookmarks"></a></p></li>
+                                        <li><p><i class="fa fa-envelope"></i>IWASH@info.com</li></p>
+                                        <li><p><i class="fa fa-phone"></i>+0987654321 (+012345678)</li></p>
+                                        <li><p><i class="fa fa-address-card" aria-hidden="true"></i>408台中市南屯區公益路二段51號</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div><!-- modal-body ---->
+
+             
+
+            </div>
+        </div>
+    </div>
+@*</section>*@
+    <!--==================== FEEDBACK Modal =============== END ===============-->
+
+
+
+<!-- End contact us  Section -->
+<!-- Intro section end -->
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[ EOF BODY of EACH Page ] %%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+<script>
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $(function () {
+        //<a href="#" class="site-btn sb-dark">了解詳情</a>
+        $("a#contactUS").click(
+            function () {
+                
+               
+                $("#ContactModal").modal('toggle');
+
+              
+
+                //$('#myModal').modal('show');
+                //$('#myModal').modal('hide');
+            });
+                //<button class="btn amado-btn w-100" data-toggle="modal" data-target="#orderCompletedModal">
+
+                //------------------ QR CODE -----
+
+        $("div.logo-area").mouseover(function () {
+            alert("產生 QR CODE 讓手機 引導到 會員登入頁");
+
+
+
+            return;
+
+            var elText = "I like laundry in your Store.";
+
+            elText = "http://192.168.1.3:8001";
+
+            var qrcode = new QRCode("qrcDIV", {
+                text: elText,//二维码内容
+                width: 184,
+                height: 184,
+                colorDark: "#000000",//指定二维码颜色
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H//容错级别
+            });
+
+            $("img#qrcIMG").hide();
+
+            //  makeCode()
+
+
+            //===================================================================
+
+
+            @*@{  string IP_host1 = "192.168.203.183"; }
+
+              jQuery.get("http://@IP_host1/cgi-bin/QRc.cgi?MSG=http://@IP_host1:8001");
+
+                setTimeout(function () {
+                    //qrcode.clear;
+                    // $("img#qrcIMG").show();
+
+                    alert("SCAN --OK");
+                    window.location.href = '@Url.Action("Member", "User")';
+
+                }, 3000);*@
+            //-------------------------------------
+            //  var imgStr = ' <img id="qrcIMG" src="~/content/img/wash.png" alt="QR CODE 登入">';
+            // $("div#qrcDIV").html(imgStr);
+            // $("img#qrcIMG").attr('src', '~/content/img/wash.png');
+
+            // var imageURI = "data:image/png;base64," + str(qrcode);
+
+            //===================================================================
+
+
+
+        });
+            
+
+    });// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   
+</script>
+
+
+

@@ -1,0 +1,213 @@
+﻿@{
+    //Layout = null;
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOME</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    @*<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>*@
+    <link href="~/content/CSS/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="~/content/CSS/Product/style.css" rel='stylesheet' type='text/css' />
+    <script src="~/Scripts/js/jquery-1.11.0.min.js"></script>
+   <!---- start-smoth-scrolling---->
+    <script src="~/Scripts/js/move-top.js"></script>
+    <script src="~/Scripts/js/easing.js"></script>
+   
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+
+    <!---- start-smoth-scrolling---->
+</head>
+<body>
+    <div class="banner" id="home">
+        <div class="container wrap">
+            <div class="header">
+                <div class="header-left">
+                    <a href="index.html"><img src="~/content/twts/img/wash.png" alt=""></a>
+                </div>
+                <div class="menu">
+                    <a class="toggleMenu" href="#"><img src="~/content/157/images/menu-icon.png" alt="" /> </a>
+
+                    <ul class="nav" id="nav">
+                        <li><a class="active" href="Index">首頁</a></li>
+                        @*<li><a href="lumia.html">產品介紹</a></li>*@
+                        <li><a href="/User/Member">會員專區</a></li>
+                    </ul>
+                    <!----start-top-nav-script---->
+                    <script type="text/javascript" src="~/content/157/js/responsive-nav.js"></script>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $(".scroll").click(function (event) {
+                                event.preventDefault();
+                                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+                            });
+                        });
+                    </script>
+                    <!----//End-top-nav-script---->
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="banner-bottom">
+            <div class="col-md-6 banner-left">
+                <h1>i wash洗衣監控</h1>
+
+                <br>
+                <br>
+                <br>
+                <br><h3>STEP.1 選擇店家</h3><br />
+                <br><h3>STEP.2 查看店家洗衣機狀態</h3><br />
+                <br><h3>STEP.3 現場掃描QR Code 啟動您的洗衣服務</h3><br />
+                <br><h3>STEP.4 訊息推播傳送,即時掌握洗衣進度</h3><br />
+                <div class="b-btn">
+
+                </div>
+            </div>
+            <div class="col-md-6 banner-right">
+                <img src="~/img/code3.jpg" alt="">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!--banner-ends-->
+    <!--nokia-starts-->
+    <div class="nokia">
+        <div class="col-md-4 nokia-left">
+            <img src="~/img/sub20.jpg" alt="">
+        </div>
+        <div class="col-md-5 nokia-middle">
+            <h3>WASH & DRY 逢甲店</h3>
+            <label> </label>
+            <p>地中海風的深藍色與白色牆面,搭配色彩繽紛的馬賽克吧台,打造出自由無拘束的氛圍,店內提供座椅與茶,讓您放鬆身心</span></p>
+            <p>地址：台中市西屯區西屯路二段295-6號</span></p>
+            <p>電話：（04）2708 6806</span></p>
+            <p>機種： 洗衣機：大型x2,小型x4, 烘衣機：大型x2,小型x2</span></p>
+            <br><br />
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">進入店內</a>
+        </div>
+        <div class="col-md-3 nokia-right">
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--nokia-ends-->
+    <!--nokia9-starts-->
+    <div class="nokia9">
+        <div class="col-md-5 nokia9-left">
+            <h3>WASH & DRY 公益店</h3>
+            <label> </label>
+            <p>洗衣店x咖啡館複合式經營,具現代風格及設計元素的新式洗衣店,等待時不妨來杯咖啡,度過慵懶悠閒的時光。
+            </p>
+            <p>地址：台中市南屯區公益路二段51號</p>
+            <p>電話：(04) 2326 5860</p>
+            <p>機種： 洗衣機：大型x2,小型x4, 烘衣機：大型x2,小型x2</p>
+            <br>
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">進入店內</a>
+        </div>
+    </div>
+    <div class="col-md-3 nokia9-right">
+
+    </div>
+    <img src="~/img/sub16.jpg" alt="">
+    </div>
+    <div class="clearfix"> </div>
+    </div>
+    <!--nokia9-ends-->
+    <!--nokia1-starts-->
+    <div class="nokia1">
+        <div class="col-md-7 nokia1-left">
+            <div class="col-md-6 nokia1-left-one">
+                <img src="~/img/sub18.jpg" alt="">
+            </div>
+            <div class="col-md-5 nokia1-left-two">
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-5 nokia-middle">
+            <h3>WASH & DRY 興大店</h3>
+            <label> </label>
+            <p>以簡約北歐風做為基底，暖木色調地板搭襯純白牆面,空間開闊明亮,柔和舒適,室內花草淨化空氣×活氧殺菌×提神醒腦,不只守護您的衣服也守護您的健康 </p>
+            <p>地址：台中市大里區國光路二段585號</p>
+            <p>電話：(04) 2406 3888</p>
+            <p>機種： 洗衣機：大型x2,小型x4, 烘衣機：大型x2,小型x2</p>
+            <br>
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">進入店內</a>
+        </div>
+        <div class="col-md-3 nokia-right">
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+    </div>
+    <!--nokia1-ends-->
+    <!--Slider-Starts-Here-->    
+    <script src="~/Scripts/js/responsiveslides.min.js"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow 4
+            $("#slider2").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+
+        });
+    </script>
+    <!--End-slider-script-->
+    <!--tripod-ends-->
+    <!--footer-starts-->
+    <div class="ftr">
+        <div class="container">
+            <div class="footer">
+                <ul>
+                    <li><a class="active" href="#"><span class="f"> </span></a></li>
+                    <li><a href="#"><span class="t"> </span></a></li>
+                    <li><a href="#"><span class="c"> </span></a></li>
+                    <li><a href="#"><span class="s"> </span></a></li>
+                    <li><a href="#"><span class="g"> </span></a></li>
+                    <li><a href="#"><span class="d"> </span></a></li>
+                </ul>
+                <label> </label>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    /*
+                    var defaults = {
+                        containerID: 'toTop', // fading element id
+                        containerHoverID: 'toTopHover', // fading element hover id
+                        scrollSpeed: 1200,
+                        easingType: 'linear'
+                    };
+                    */
+
+                    $().UItoTop({ easingType: 'easeOutQuart' });
+
+                });
+            </script>
+            <a href="#home" id="toTop" class="scroll" style=" display block;"> <span id="toTopHover" style=" opacity 1;"> </span></a>
+        </div>
+
+</body>
+</html>

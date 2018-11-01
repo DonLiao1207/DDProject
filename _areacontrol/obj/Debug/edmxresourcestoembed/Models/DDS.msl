@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DDSModelStoreContainer" CdmEntityContainer="DDSEntities">
+    <EntitySetMapping Name="Areas">
+      <EntityTypeMapping TypeName="DDSModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="Row" ColumnName="Row" />
+          <ScalarProperty Name="Col" ColumnName="Col" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="BtDis" ColumnName="BtDis" />
+          <ScalarProperty Name="RtDis" ColumnName="RtDis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AreaContents">
+      <EntityTypeMapping TypeName="DDSModel.AreaContent">
+        <MappingFragment StoreEntitySet="AreaContent">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="ListID" ColumnName="ListID" />
+          <ScalarProperty Name="DivID" ColumnName="DivID" />
+          <ScalarProperty Name="Opa" ColumnName="Opa" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLists">
+      <EntityTypeMapping TypeName="DDSModel.UserList">
+        <MappingFragment StoreEntitySet="UserList">
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="Times" ColumnName="Times" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Isvalid" ColumnName="Isvalid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

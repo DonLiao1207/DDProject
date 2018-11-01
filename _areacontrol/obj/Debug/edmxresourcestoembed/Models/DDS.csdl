@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaID" />
+    </Key>
+    <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Owner" Type="Int32" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Row" Type="Int32" />
+    <Property Name="Col" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="BtDis" Type="Int32" />
+    <Property Name="RtDis" Type="Int32" />
+    <NavigationProperty Name="UserList" Relationship="DDSModel.FK_Area_UserList" FromRole="Area" ToRole="UserList" />
+  </EntityType>
+  <EntityType Name="AreaContent">
+    <Key>
+      <PropertyRef Name="ListID" />
+    </Key>
+    <Property Name="ListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DivID" Type="Int32" />
+    <Property Name="Opa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AreaContent1" Relationship="DDSModel.FK_AreaContent_AreaContent" FromRole="AreaContent" ToRole="AreaContent1" />
+    <NavigationProperty Name="AreaContent2" Relationship="DDSModel.FK_AreaContent_AreaContent" FromRole="AreaContent1" ToRole="AreaContent" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Isvalid" Type="Boolean" />
+    <NavigationProperty Name="Areas" Relationship="DDSModel.FK_Area_UserList" FromRole="UserList" ToRole="Area" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Credit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Total" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Times" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="Access" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DDSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Areas" EntityType="Self.Area" />
+    <EntitySet Name="AreaContents" EntityType="Self.AreaContent" />
+    <EntitySet Name="UserLists" EntityType="Self.UserList" />
+    <AssociationSet Name="FK_Area_UserList" Association="DDSModel.FK_Area_UserList">
+      <End Role="UserList" EntitySet="UserLists" />
+      <End Role="Area" EntitySet="Areas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AreaContent_AreaContent" Association="DDSModel.FK_AreaContent_AreaContent">
+      <End Role="AreaContent" EntitySet="AreaContents" />
+      <End Role="AreaContent1" EntitySet="AreaContents" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Area_UserList">
+    <End Type="DDSModel.UserList" Role="UserList" Multiplicity="0..1" />
+    <End Type="DDSModel.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserList">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AreaContent_AreaContent">
+    <End Type="DDSModel.AreaContent" Role="AreaContent" Multiplicity="1" />
+    <End Type="DDSModel.AreaContent" Role="AreaContent1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AreaContent">
+        <PropertyRef Name="ListID" />
+      </Principal>
+      <Dependent Role="AreaContent1">
+        <PropertyRef Name="ListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

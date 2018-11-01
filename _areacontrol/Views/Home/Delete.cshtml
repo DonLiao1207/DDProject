@@ -1,0 +1,66 @@
+﻿@model _AreaControl.Models.Area
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>刪除</h2>
+
+<h3>確定要刪除此筆資料?</h3>
+<div>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AreaName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Row)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Col)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+        </tr>    
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.AreaName)
+            </td>
+            <td>
+                @Html.DisplayFor(model =>model.Row)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Col)
+            </td>
+            <td>
+               @Html.DisplayFor(model => model.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Height)
+            </td>
+            </tr>
+    </table>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+<script src="~/Scripts/jquery.reflection.js"></script>
+<script src="~/Scripts/jquery.cloud9carousel.js"></script>
+<script src="~/Scripts/main3d.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/wrkspace.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/SignalR.js"></script>

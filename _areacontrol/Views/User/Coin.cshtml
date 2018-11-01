@@ -1,0 +1,77 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Memlayout.cshtml";
+}
+
+
+
+
+<ol class="breadcrumb">
+
+    
+    <li class="breadcrumb-item " aria-current="page">投幣介面</li>
+</ol>
+
+@*<script src="~/Scripts/SignalRcoin.js"></script>*@
+
+<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Form Name -->
+        @*<legend style="text-align:center; font-size:40px;">投幣介面</legend>*@
+
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton">選擇洗衣機</label>
+
+            <div class="col-md-2">
+                <select id="mySelect" style="height:27px;">
+                    <option id="wnone" value="">
+                    <option id="wA" value="洗衣機_A">洗衣機_A
+                    <option id="wB" value="洗衣機_B">洗衣機_B
+                    <option id="wC" value="洗衣機_C">洗衣機_C
+                    <option id="wD" value="洗衣機_D">洗衣機_D
+                    <option id="wE" value="洗衣機_E">洗衣機_E
+                    <option id="wF" value="洗衣機_F">洗衣機_F
+                    <option id="wG" value="洗衣機_G">洗衣機_G
+                    <option id="wH" value="洗衣機_H">洗衣機_H
+                </select>
+                <button id="wash" name="wA" class="btn btn-success">投幣</button>
+            </div>
+        </div>
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton">烘衣機_A</label>
+
+            <div class="col-md-2">
+                <input type="text" id="valueB" style="width:30%; align-items:center;" />
+
+                <button id="wA" name="wB" class="btn btn-danger">投幣</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton">烘衣機_B</label>
+
+            <div class="col-md-2">
+                <input type="text" id="valueB" style="width:30%; align-items:center;" />
+
+                <button id="wA" name="wB" class="btn btn-danger">投幣</button>
+            </div>
+        </div>
+        <!-- Button -->
+        <hr />
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton">洗衣機_A</label>
+
+            <div class="col-md-2">
+                <input type="text" id="valueA" style="width:30%; align-items:center;" />
+
+                <button id="wA" name="wA" class="btn btn-success">投幣</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+

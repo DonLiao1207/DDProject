@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>I Wash</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="iWash - Cloud Smart Assistant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link href="~/content/img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/CSS/Home/bootstrap.min.css" rel="stylesheet" />   
+    <link href="~/Content/CSS/Home/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home/animate.css" rel="stylesheet" />
+   
+    <link href="~/Content/CSS/Home/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    
+
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+        img#qrcIMG {
+
+            width:186px;
+            height:216px;
+
+
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header section start -->
+    <header class="header-area">
+
+        @RenderSection("logo", false)
+        
+      
+        <div class="nav-switch">
+            <i class="fa fa-bars"></i>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li class="active"><a href='@Url.Action("Index", "Home")'><h4 style="color:#fff79a; font-size:25px;">首頁</h4></a></li>
+                <li><a href='@Url.Action("Product", "Home")'><h4 style="color:#fff79a; font-size:25px;">服務介紹</h4></a></li>
+                <li><a href='@Url.Action("Member", "User")'><h4 style="color:#fff79a; font-size:25px;">會員專區</h4></a></li>
+              
+
+            </ul>
+        </nav>
+    </header>
+    <!-- Header section end -->
+           
+        @RenderSection("HeroSlider", false)
+     <!-- Hero section start -->
+
+   
+
+
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[START BODY of EACH Page ]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+
+  
+
+   
+    <!-- Section ONE -->
+    <!-- Clients section start -->
+    
+    @RenderBody()
+    
+     <!-- Clients section end -->
+    <!-- Footer section start -->
+    <footer class="footer-section">
+        <div class="footer-social">
+            <div class="social-links">
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+
+       
+
+
+   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%[ EOF BODY of EACH Page ] %%%%%%%%%%%%%%%%%%%%%%%%%%%%  -->
+
+
+    </footer>
+    <!-- Footer section end -->
+    <!--====== Javascripts & Jquery ======-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/isotope.pkgd.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/jquery.owl-filter.js"></script>
+    <script src="~/Scripts/magnific-popup.min.js"></script>
+    <script src="~/Scripts/circle-progress.min.js"></script>
+    <script src="~/Scripts/mainind.js"></script>
+    <script src="~/Scripts/qrcode.min.js"></script>
+    <script>
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        $(function () {
+            
+
+     
+
+
+    });// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    </script>
+</body>
+</html>

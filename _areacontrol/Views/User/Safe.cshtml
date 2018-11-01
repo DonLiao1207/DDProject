@@ -1,0 +1,109 @@
+﻿@model _AreaControl.Models.UserList
+    
+@{
+    Layout = "~/Views/Shared/_Memlayout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4 id="ti"></h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="form-group">
+                <label class="control-label col-md-2">帳號</label>
+                <div class="col-md-10" style="margin-top:6px;">
+                    @Html.DisplayFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">信箱</label>
+                <div class="col-md-10" style="margin-top:6px;">
+                    @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+            <div id="editaf1" class="form-group" style="display:none;">
+                <label class="control-label col-md-2">新密碼</label>
+                <div class="col-md-10" style="margin-top:6px;">
+                    <input id="pa" type="password" class = "form-control half"/>
+                </div>
+            </div>
+
+            <div id="editaf2" class="form-group" style="display:none;">
+                <label class="control-label col-md-2">確認密碼</label>
+                <div class="col-md-10" style="margin-top:6px;">
+                    <input id="cpa"  type="password" class = "form-control half"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <p id="alarm"></p>
+                    <input id="doedit" type="button" value="更改密碼" class="btn btn-danger" />
+                    <input id="edited" type="button" value="確認" class="btn btn-primary" style="display:none;" />
+                </div>
+            </div>
+        </div>
+    }
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    if ($("#Myname").text() == "新會員") {
+        //        alert("您好，請新增會員資料");
+        //    }
+        //    $("#callname").html($("#Myname").text());
+        //})
+        var ti = @Model.Times ;
+        
+        $('#doedit').click(function () {
+            $("#edited").show();
+            $("#editaf1").show();
+            $("#editaf2").show();
+            $("#doedit").hide();
+        })
+
+        $('#edited').click(function () {
+            var pa=$("#pa").val();
+            var cpa=$("#cpa").val();
+
+            if(pa==cpa){
+                $("#ti").html("OK")
+                $.ajax({
+                    type: "post",
+                    data: { Password : pa},
+                    url: "/User/ChangePassword",
+                    success: function (result) {
+                        $("#ti").html(result);
+                        $("#editaf1").hide();
+                        $("#editaf2").hide();
+                        $("#doedit").hide();
+                        $('#edited').hide();
+                        setTimeout(function(){
+                            window.location.href = "/User/Safe"
+                        }, 2000);
+                    }
+                });
+            }
+            else{
+                $("#ti").html("請確認密碼是否相符")
+            }
+        })
+    </script>
+</body>
+</html>

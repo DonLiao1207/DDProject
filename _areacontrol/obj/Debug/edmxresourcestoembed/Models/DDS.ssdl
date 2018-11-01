@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DDSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaID" />
+    </Key>
+    <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Owner" Type="int" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Row" Type="int" />
+    <Property Name="Col" Type="int" />
+    <Property Name="Height" Type="int" />
+    <Property Name="Width" Type="int" />
+    <Property Name="BtDis" Type="int" />
+    <Property Name="RtDis" Type="int" />
+  </EntityType>
+  <EntityType Name="AreaContent">
+    <Key>
+      <PropertyRef Name="ListID" />
+    </Key>
+    <Property Name="ListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DivID" Type="int" />
+    <Property Name="Opa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pic" Type="nvarchar(max)" />
+    <Property Name="Data" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="UserList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Isvalid" Type="bit" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" MaxLength="14" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Credit" Type="nchar" MaxLength="10" />
+    <Property Name="Total" Type="nchar" MaxLength="100" />
+    <Property Name="Times" Type="nchar" MaxLength="10" />
+    <Property Name="Access" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Area_UserList">
+    <End Role="UserList" Type="Self.UserList" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserList">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AreaContent_AreaContent">
+    <End Role="AreaContent" Type="Self.AreaContent" Multiplicity="1" />
+    <End Role="AreaContent1" Type="Self.AreaContent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AreaContent">
+        <PropertyRef Name="ListID" />
+      </Principal>
+      <Dependent Role="AreaContent1">
+        <PropertyRef Name="ListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DDSModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AreaContent" EntityType="Self.AreaContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Area_UserList" Association="Self.FK_Area_UserList">
+      <End Role="UserList" EntitySet="UserList" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AreaContent_AreaContent" Association="Self.FK_AreaContent_AreaContent">
+      <End Role="AreaContent" EntitySet="AreaContent" />
+      <End Role="AreaContent1" EntitySet="AreaContent" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
