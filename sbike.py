@@ -48,7 +48,6 @@ class CanBusPreProcess:
         load_data = [time_ori, torque_ori, trpm_ori, speed_ori, iqc_ori, mrpm_ori, ast_mode]
         match = {'00': 1, '01': 2, '03': 3, '05': 4, '07': 5, '09': 6}
         for input_msg in input_msg_list:
-            input_msg = re.split("\s+", input_msg_list.strip())
             if input_msg[2] == 'F9':
                 try:
                     idx = match[input_msg[5]]
@@ -67,7 +66,6 @@ class CanBusPreProcess:
             col_names = ['time', 'torque', 'rpm', 'speed', 'iq_cmd', 'mrpm', 'ast_mode']
             load_data.columns = col_names
             return load_data
-
 
     def data_filter(self, pre_filter_df, z_th):
         for fe_str in self.fe:
