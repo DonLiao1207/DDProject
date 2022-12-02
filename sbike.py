@@ -1,14 +1,15 @@
+# -*- coding: utf-8 -*-
 import os
 import time
 import pandas as pd
 import numpy as np
 import json
 import re
-import math
-import pandas_bokeh
+import math	
 import can
 from scipy import stats
 from sklearn.preprocessing import LabelEncoder
+import threading
 
 '''
 Read canbus output txt file
@@ -26,7 +27,7 @@ Read canbus output txt file
 09		助力模式
 
 '''
-print("")
+
 
 class CanBusPreProcess:
     def __init__(self):
@@ -35,6 +36,15 @@ class CanBusPreProcess:
         os.system(f'sudo ip link set {self.can_bus_ch} type can bitrate 500000')
         os.system(f'sudo ifconfig {self.can_bus_ch} up')
         self.can_obj = can.interface.Bus(channel=self.can_bus_ch, bustype='socketcan')
+
+    def receive_only(self):
+        while True:
+            msg = self.can_obj.recv(10.0)
+            print(msg)
+            if msg is None:
+                print('Time Out')
+                break
+        os.system(f'sudo ifconfig {can_bus_ch} down')
 
     @staticmethod
     def load_canbus_msg(input_msg_list):
@@ -47,6 +57,7 @@ class CanBusPreProcess:
         time_ori = []
         load_data = [time_ori, torque_ori, trpm_ori, speed_ori, iqc_ori, mrpm_ori, ast_mode]
         match = {'00': 1, '01': 2, '03': 3, '05': 4, '07': 5, '09': 6}
+        print(input_msg_list)
         for input_msg in input_msg_list:
             if input_msg[2] == 'F9':
                 try:
@@ -106,25 +117,42 @@ class CanBusPreProcess:
     def handler_data_preprocess(self, agg_num):
         can_list = []
         time_set_diff_value = 0.085
+        time_now = time.time()
         while True:
             try:
                 # read canbus msg
                 msg = self.can_obj.recv(10.0)
-                msg_strip = re.split("\s+", msg.strip())
+                msg_hex = msg.data.hex()
+                
+                msg_head = msg_hex[0:2]
+                msg_body = msg_hex[2:]
+               
+                # print(f'message_data_body: {int(msg_body, base=16)}')                
+                msg_strip = re.split("\s+", str(msg).strip())
                 # time value and tag index
-                time_v = msg_strip[0]
-                item_idx = msg_strip[5]
-                print(time_v, item_idx)
+                time_idx = msg_strip[0]
+                time_v = msg_strip[1]
+                '''
+                print(time_idx, float(time_v)-time_now)
+                print(f'message_data_hex: {msg_hex}')
+                print(f'message_data_head: {int(msg_body, base=16)}')
+                print(f'arbit_id: {str(hex(msg.arbitration_id))}')
+                '''
+                # time.sleep(0.5)
                 # check the data in 1 second:(1)time (2)0A position
                 if can_list:
-                    time_v_start = can_list[0][0]
+                    time_v_start = can_list[0][1]
                     item_idx_start = can_list[0][5]
-                    time_diff = time_v - time_v_start
+                    time_diff = float(time_v) - float(time_v_start)
+                    # print(f'time diff:{time_diff}')
                     # It's mean the data is the next second's data set
-                    if time_diff > 0.085 or item_idx == '0A':
+                    if time_diff > 0.085 or time_idx == '0a':
+                        print(f'*-----can list length------*: {len(can_list)}')
                         pre_data = self.load_canbus_msg(can_list)
                         print(pre_data)
                         can_list = []
+                        can_list.append(msg_strip)
+                    else:
                         can_list.append(msg_strip)
                 else:
                     can_list.append(msg_strip)
@@ -141,4 +169,8 @@ class CanBusPreProcess:
         print("handler_unicorn_control")
 
 sbk = CanBusPreProcess()
+print("*1.--thread 1 start--*")
+th1_data_infer = threading.Thread(target=sbk.handler_data_preprocess(3, ))
+th1_data_infer.start()
+# sbk.receive_only()
 # sbk.pre_data
